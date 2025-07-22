@@ -37,6 +37,28 @@ The project uses a .gitignore file to keep the repository clean and efficient. I
 5. **Data Generation Script:** Created `scripts/generate_customer_master.py` to generate fake customer data (10,000 or 1,000,000+ records) and save as `data/customer_master.csv` (which is ignored by git).
 6. **Version Control:** All code/scripts and config files are tracked and pushed to GitHub. Data files are ignored for efficiency.
 
+## Customer Master Data Generation (Detailed)
+The script `scripts/generate_customer_master.py` creates a large, realistic customer master dataset for analysis. Here’s what it does:
+
+- **Imports Required Libraries:** Uses `pandas` for data handling, `faker` for generating fake but realistic data, and `random` for random choices.
+- **Sets Number of Customers:** You can choose how many customers to generate (e.g., 10,000 or 1,000,000).
+- **Defines Customer Attributes:**
+  - CustomerID: Unique number for each customer
+  - Name: Randomly generated name
+  - Age: Random age between 18 and 80
+  - Gender: Randomly chosen from Male, Female, Other
+  - City/State: Randomly generated city and state
+  - JoinDate: Random date in the last 10 years
+  - Type: Randomly chosen from Regular, Premium, VIP
+  - Status: Randomly chosen from Active, Inactive, Churned
+- **Generates Data:** Loops through the desired number of customers, creating a dictionary for each with the above attributes.
+- **Creates a DataFrame:** Converts the list of customer dictionaries into a pandas DataFrame (like a table).
+- **Ensures Data Folder Exists:** Uses `os.makedirs('data', exist_ok=True)` to make sure the `data/` folder is present.
+- **Saves as CSV:** Writes the DataFrame to `data/customer_master.csv`.
+- **Prints a Message:** Lets you know the file was created and where it’s saved.
+
+**Note:** The generated CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
+
 ## Getting Started
 1. Clone the repository.
 2. Install dependencies: `pip install -r requirements.txt`
