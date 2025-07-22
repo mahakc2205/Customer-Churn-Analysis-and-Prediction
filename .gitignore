@@ -1,0 +1,4 @@
+# Ignore data files and large files
+/data/
+*.csv
+
