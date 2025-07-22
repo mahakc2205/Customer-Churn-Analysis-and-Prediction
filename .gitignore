@@ -2,3 +2,19 @@
 /data/
 *.csv
 
+# Ignore virtual environments
+venv/
+.env/
+
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore VS Code settings
+.vscode/
+
