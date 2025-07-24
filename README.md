@@ -34,8 +34,9 @@ The project uses a .gitignore file to keep the repository clean and efficient. I
 2. **.gitignore:** Configured to ignore all data files, CSVs, virtual environments, Python bytecode, and editor/system files. Jupyter-related ignores removed since not using Jupyter.
 3. **requirements.txt:** Added `pandas`, `numpy`, and `faker` for data generation and analysis.
 4. **README.md:** Maintained with project overview and instructions.
-5. **Data Generation Script:** Created `scripts/generate_customer_master.py` to generate fake customer data (10,000 or 1,000,000+ records) and save as `data/customer_master.csv` (which is ignored by git).
-6. **Version Control:** All code/scripts and config files are tracked and pushed to GitHub. Data files are ignored for efficiency.
+5. **Customer Data Generation Script:** Created `scripts/generate_customer_master.py` to generate fake customer data (10,000 or 1,000,000+ records) and save as `data/customer_master.csv` (which is ignored by git).
+6. **Usage/Activity Data Generation Script:** Created `scripts/generate_usage_data.py` to generate fake usage/activity records (e.g., 100,000 records) and save as `data/usage_data.csv` (also ignored by git).
+7. **Version Control:** All code/scripts and config files are tracked and pushed to GitHub. Data files are ignored for efficiency.
 
 ## Customer Master Data Generation (Detailed)
 The script `scripts/generate_customer_master.py` creates a large, realistic customer master dataset for analysis. Here’s what it does:
@@ -59,11 +60,31 @@ The script `scripts/generate_customer_master.py` creates a large, realistic cust
 
 **Note:** The generated CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
 
+## Usage/Activity Data Generation (Detailed)
+The script `scripts/generate_usage_data.py` creates a large, realistic usage/activity dataset for analysis. Here’s what it does:
+
+- **Imports Required Libraries:** Uses `pandas`, `numpy`, `faker`, and `random` for data generation and handling.
+- **Sets Number of Usage Records:** You can choose how many usage/activity records to generate (e.g., 100,000).
+- **Defines Usage Attributes:**
+  - CustomerID: Randomly selected from real customers in the master data
+  - UsageDate: Random date in the last 2 years
+  - Service: Randomly chosen from ['Mobile App', 'Website', 'ATM', 'Branch Visit']
+  - Amount: Random float between 10 and 1000 (2 decimal places)
+  - SessionDuration: Random integer between 1 and 120 (minutes)
+- **Generates Data:** Loops through the desired number of usage records, creating a dictionary for each with the above attributes.
+- **Creates a DataFrame:** Converts the list of usage dictionaries into a pandas DataFrame.
+- **Ensures Data Folder Exists:** Uses `os.makedirs('data', exist_ok=True)` to make sure the `data/` folder is present.
+- **Saves as CSV:** Writes the DataFrame to `data/usage_data.csv`.
+- **Prints a Message:** Lets you know the file was created and where it’s saved.
+
+**Note:** The generated CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
+
 ## Getting Started
 1. Clone the repository.
 2. Install dependencies: `pip install -r requirements.txt`
-3. Run the data generation script: `python scripts/generate_customer_master.py`
-4. Generated data will be saved in the `data/` folder (not tracked by git).
+3. Run the customer data generation script: `python scripts/generate_customer_master.py`
+4. Run the usage/activity data generation script: `python scripts/generate_usage_data.py`
+5. Generated data will be saved in the `data/` folder (not tracked by git).
 
 ---
 
