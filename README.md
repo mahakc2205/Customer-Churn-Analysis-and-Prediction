@@ -36,7 +36,8 @@ The project uses a .gitignore file to keep the repository clean and efficient. I
 4. **README.md:** Maintained with project overview and instructions.
 5. **Customer Data Generation Script:** Created `scripts/generate_customer_master.py` to generate fake customer data (10,000 or 1,000,000+ records) and save as `data/customer_master.csv` (which is ignored by git).
 6. **Usage/Activity Data Generation Script:** Created `scripts/generate_usage_data.py` to generate fake usage/activity records (e.g., 100,000 records) and save as `data/usage_data.csv` (also ignored by git).
-7. **Version Control:** All code/scripts and config files are tracked and pushed to GitHub. Data files are ignored for efficiency.
+7. **Payment/Billing Data Generation Script:** Created `scripts/generate_payment_data.py` to generate fake payment/billing records (e.g., 20,000 records) and save as `data/payment_data.csv` (also ignored by git).
+8. **Version Control:** All code/scripts and config files are tracked and pushed to GitHub. Data files are ignored for efficiency.
 
 ## Customer Master Data Generation (Detailed)
 The script `scripts/generate_customer_master.py` creates a large, realistic customer master dataset for analysis. Here’s what it does:
@@ -79,12 +80,33 @@ The script `scripts/generate_usage_data.py` creates a large, realistic usage/act
 
 **Note:** The generated CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
 
+## Payment/Billing Data Generation (Detailed)
+The script `scripts/generate_payment_data.py` creates a large, realistic payment/billing dataset for analysis. Here’s what it does:
+
+- **Imports Required Libraries:** Uses `pandas`, `numpy`, `faker`, and `random` for data generation and handling.
+- **Sets Number of Payment Records:** You can choose how many payment/billing records to generate (e.g., 20,000).
+- **Defines Payment Attributes:**
+  - CustomerID: Randomly selected from real customers in the master data
+  - BillDate: Random date in the last 2 years
+  - BillAmount: Random float between 100 and 10,000 (2 decimal places)
+  - PaymentStatus: Randomly chosen from ['Paid', 'Late', 'Missed']
+  - PaymentDate: If Paid, 0–10 days after BillDate; if Late, 11–30 days after BillDate; if Missed, left empty
+  - PaymentMethod: Randomly chosen from ['Card', 'NetBanking', 'UPI', 'Cash', 'Cheque'] if Paid or Late; left empty if Missed
+- **Generates Data:** Loops through the desired number of payment records, creating a dictionary for each with the above attributes and logic for payment status.
+- **Creates a DataFrame:** Converts the list of payment dictionaries into a pandas DataFrame.
+- **Ensures Data Folder Exists:** Uses `os.makedirs('data', exist_ok=True)` to make sure the `data/` folder is present.
+- **Saves as CSV:** Writes the DataFrame to `data/payment_data.csv`.
+- **Prints a Message:** Lets you know the file was created and where it’s saved.
+
+**Note:** The generated CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
+
 ## Getting Started
 1. Clone the repository.
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run the customer data generation script: `python scripts/generate_customer_master.py`
 4. Run the usage/activity data generation script: `python scripts/generate_usage_data.py`
-5. Generated data will be saved in the `data/` folder (not tracked by git).
+5. Run the payment/billing data generation script: `python scripts/generate_payment_data.py`
+6. Generated data will be saved in the `data/` folder (not tracked by git).
 
 ---
 
