@@ -38,10 +38,11 @@ The project uses a .gitignore file to keep the repository clean and efficient. I
 6. **Usage/Activity Data Generation Script:** Created `scripts/generate_usage_data.py` to generate fake usage/activity records (e.g., 100,000 records) and save as `data/usage_data.csv` (also ignored by git).
 7. **Payment/Billing Data Generation Script:** Created `scripts/generate_payment_data.py` to generate fake payment/billing records (e.g., 20,000 records) and save as `data/payment_data.csv` (also ignored by git).
 8. **Support/Complaint Data Generation Script:** Created `scripts/generate_support_data.py` to generate fake support/complaint records (e.g., 8,000 records) and save as `data/support_data.csv` (also ignored by git).
-9. **Version Control:** All code/scripts and config files are tracked and pushed to GitHub. Data files are ignored for efficiency.
+9. **Data Integration Script:** Created `scripts/data_integration.py` to read, clean, and merge all generated datasets into a unified customer dataset for analysis.
+10. **Version Control:** All code/scripts and config files are tracked and pushed to GitHub. Data files are ignored for efficiency.
 
 ## Customer Master Data Generation (Detailed)
-The script `scripts/generate_customer_master.py` creates a large, realistic customer master dataset for analysis. Here’s what it does:
+The script `scripts/generate_customer_master.py` creates a large, realistic customer master dataset for analysis. Here's what it does:
 
 - **Imports Required Libraries:** Uses `pandas` for data handling, `faker` for generating fake but realistic data, and `random` for random choices.
 - **Sets Number of Customers:** You can choose how many customers to generate (e.g., 10,000 or 1,000,000).
@@ -58,12 +59,12 @@ The script `scripts/generate_customer_master.py` creates a large, realistic cust
 - **Creates a DataFrame:** Converts the list of customer dictionaries into a pandas DataFrame (like a table).
 - **Ensures Data Folder Exists:** Uses `os.makedirs('data', exist_ok=True)` to make sure the `data/` folder is present.
 - **Saves as CSV:** Writes the DataFrame to `data/customer_master.csv`.
-- **Prints a Message:** Lets you know the file was created and where it’s saved.
+- **Prints a Message:** Lets you know the file was created and where it's saved.
 
 **Note:** The generated CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
 
 ## Usage/Activity Data Generation (Detailed)
-The script `scripts/generate_usage_data.py` creates a large, realistic usage/activity dataset for analysis. Here’s what it does:
+The script `scripts/generate_usage_data.py` creates a large, realistic usage/activity dataset for analysis. Here's what it does:
 
 - **Imports Required Libraries:** Uses `pandas`, `numpy`, `faker`, and `random` for data generation and handling.
 - **Sets Number of Usage Records:** You can choose how many usage/activity records to generate (e.g., 100,000).
@@ -71,18 +72,18 @@ The script `scripts/generate_usage_data.py` creates a large, realistic usage/act
   - CustomerID: Randomly selected from real customers in the master data
   - UsageDate: Random date in the last 2 years
   - Service: Randomly chosen from ['Mobile App', 'Website', 'ATM', 'Branch Visit']
-  - Amount: Random float between 10 and 1000 (2 decimal places)
+  - Amount: Random float between 10 and 1000 (2 decimal places) - represents service usage fees
   - SessionDuration: Random integer between 1 and 120 (minutes)
 - **Generates Data:** Loops through the desired number of usage records, creating a dictionary for each with the above attributes.
 - **Creates a DataFrame:** Converts the list of usage dictionaries into a pandas DataFrame.
 - **Ensures Data Folder Exists:** Uses `os.makedirs('data', exist_ok=True)` to make sure the `data/` folder is present.
 - **Saves as CSV:** Writes the DataFrame to `data/usage_data.csv`.
-- **Prints a Message:** Lets you know the file was created and where it’s saved.
+- **Prints a Message:** Lets you know the file was created and where it's saved.
 
 **Note:** The generated CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
 
 ## Payment/Billing Data Generation (Detailed)
-The script `scripts/generate_payment_data.py` creates a large, realistic payment/billing dataset for analysis. Here’s what it does:
+The script `scripts/generate_payment_data.py` creates a large, realistic payment/billing dataset for analysis. Here's what it does:
 
 - **Imports Required Libraries:** Uses `pandas`, `numpy`, `faker`, and `random` for data generation and handling.
 - **Sets Number of Payment Records:** You can choose how many payment/billing records to generate (e.g., 20,000).
@@ -97,12 +98,12 @@ The script `scripts/generate_payment_data.py` creates a large, realistic payment
 - **Creates a DataFrame:** Converts the list of payment dictionaries into a pandas DataFrame.
 - **Ensures Data Folder Exists:** Uses `os.makedirs('data', exist_ok=True)` to make sure the `data/` folder is present.
 - **Saves as CSV:** Writes the DataFrame to `data/payment_data.csv`.
-- **Prints a Message:** Lets you know the file was created and where it’s saved.
+- **Prints a Message:** Lets you know the file was created and where it's saved.
 
 **Note:** The generated CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
 
 ## Support/Complaint Data Generation (Detailed)
-The script `scripts/generate_support_data.py` creates a large, realistic support/complaint dataset for analysis. Here’s what it does:
+The script `scripts/generate_support_data.py` creates a large, realistic support/complaint dataset for analysis. Here's what it does:
 
 - **Imports Required Libraries:** Uses `pandas`, `numpy`, `faker`, and `random` for data generation and handling.
 - **Sets Number of Support/Complaint Records:** You can choose how many support/complaint records to generate (e.g., 8,000).
@@ -116,9 +117,27 @@ The script `scripts/generate_support_data.py` creates a large, realistic support
 - **Creates a DataFrame:** Converts the list of support dictionaries into a pandas DataFrame.
 - **Ensures Data Folder Exists:** Uses `os.makedirs('data', exist_ok=True)` to make sure the `data/` folder is present.
 - **Saves as CSV:** Writes the DataFrame to `data/support_data.csv`.
-- **Prints a Message:** Lets you know the file was created and where it’s saved.
+- **Prints a Message:** Lets you know the file was created and where it's saved.
 
 **Note:** The generated CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
+
+## Data Integration (Detailed)
+The script `scripts/data_integration.py` reads, cleans, and merges all generated datasets into a unified customer dataset for analysis. Here's what it does:
+
+- **Imports Required Libraries:** Uses `pandas` and `numpy` for data manipulation and cleaning.
+- **Reads All CSV Files:** Loads customer_master.csv, usage_data.csv, payment_data.csv, and support_data.csv into pandas DataFrames.
+- **Data Cleaning:**
+  - Converts all date columns to proper datetime format
+  - Handles missing values in payment data (fills missing payment methods with 'Not Applicable')
+- **Creates Summary Statistics:**
+  - **Usage Summary:** For each customer, calculates usage count, total amount spent on services, average amount per usage, total session duration, and average duration per session
+  - **Payment Summary:** For each customer, calculates total bill amount, average bill amount, and count of missed payments
+  - **Support Summary:** For each customer, calculates number of support tickets, average resolution time, and count of unsatisfied tickets
+- **Merges All Data:** Combines customer master data with usage, payment, and support summaries using CustomerID as the common field.
+- **Saves Merged Dataset:** Creates a unified CSV file (`merged_customer_data.csv`) containing all customer information and their behavioral patterns.
+- **Output:** A comprehensive dataset ready for churn analysis and machine learning modeling.
+
+**Note:** The merged CSV is ignored by git and not uploaded to GitHub, keeping your repository clean.
 
 ## Getting Started
 1. Clone the repository.
@@ -127,7 +146,8 @@ The script `scripts/generate_support_data.py` creates a large, realistic support
 4. Run the usage/activity data generation script: `python scripts/generate_usage_data.py`
 5. Run the payment/billing data generation script: `python scripts/generate_payment_data.py`
 6. Run the support/complaint data generation script: `python scripts/generate_support_data.py`
-7. Generated data will be saved in the `data/` folder (not tracked by git).
+7. Run the data integration script: `python scripts/data_integration.py`
+8. Generated data will be saved in the `data/` folder (not tracked by git).
 
 ---
 
