@@ -72,7 +72,7 @@ support_summary=support_df.groupby('CustomerID').agg({
 print("Support summary created")
 
 
-support_summary_columns=['Support_Tickets','Avg_ResolutionTime','Unsatisfied_Count']
+support_summary.columns=['Support_Tickets','Avg_ResolutionTime','Unsatisfied_Count']
 support_summary=support_summary.reset_index()
 print("Support summary column names fixed")
 
