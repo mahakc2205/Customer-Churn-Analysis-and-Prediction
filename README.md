@@ -152,3 +152,42 @@ The script `scripts/data_integration.py` reads, cleans, and merges all generated
 ---
 
 *Update this README as the project progresses.* 
+
+# Power BI Dashboard: Customer Churn Prediction & Analysis
+
+## Power BI Dashboard Overview
+After generating and integrating the data, we created an interactive Power BI dashboard to visualize and analyze customer churn and behavior. The dashboard provides a comprehensive view of customer demographics, engagement, payment behavior, support interactions, and churn risk.
+
+### **Key Visuals and Insights:**
+- **Total Customers Card:** Shows the total number of customers in the dataset.
+- **Customer Status Distribution:** Bar chart/table showing counts of Active, Inactive, and Churned customers.
+- **Customer Type Distribution:** Bar chart/table for Regular, Premium, and VIP customers.
+- **Age Distribution Table:** Shows the number of customers by age.
+- **Slicers:** Interactive filters for Status, Gender, State/City, and Age range to explore different customer segments.
+- **Average Usage Pattern:** Table summarizing average usage count, total amount spent, and total session duration per customer.
+- **Payment Behavior Summary:** Table showing total bill amount and missed payments.
+- **Support and Satisfaction Summary:** Table with total support tickets, average resolution time, and unsatisfied count.
+- **Unsatisfied Customers by Status:** Bar chart showing which statuses have the most unsatisfied customers.
+- **Support Tickets by Customer Type:** Bar chart for support ticket counts by customer type.
+- **Top Customers by Usage:** Table listing the most active customers by usage count.
+- **Number of Customers by Age:** Table showing customer count for each age group.
+
+### **How to Use the Dashboard:**
+- Use slicers to filter the data by customer status, gender, city, or age.
+- Hover over charts and tables to see detailed values.
+- Use the dashboard to identify high-risk (low-engagement) customers, analyze churn patterns, and explore customer support and payment behaviors.
+
+### **Power BI File**
+- The dashboard is saved as a `.pbix` file (e.g., `Customer_Churn_Analysis.pbix`).
+- To view or edit the dashboard, open the `.pbix` file in Power BI Desktop.
+- You can export the dashboard as PDF or PowerPoint for sharing or presentations.
+
+### **Sample Insights:**
+- Most customers are in the 18-30 age group.
+- Churned customers tend to have lower usage counts and higher missed payments.
+- VIP customers are more engaged but may also raise more support tickets.
+- Unsatisfied support experiences are more common among churned and inactive customers.
+
+---
+
+*Update this README as the project progresses or if you add new Power BI visuals or insights.* 
